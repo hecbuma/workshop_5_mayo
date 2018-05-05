@@ -10,6 +10,7 @@ class TopicsController < ApplicationController
   # GET /topics/1
   # GET /topics/1.json
   def show
+    puts @post
   end
 
   # GET /topics/new
@@ -59,6 +60,13 @@ class TopicsController < ApplicationController
       format.html { redirect_to topics_url, notice: 'Topic was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  #TODO: REfactor - move to separate controller.
+  def upvote
+    @topic = Topic.find(params[:id])
+    @topic.votes.create
+    redirect_to topics_path
   end
 
   private
